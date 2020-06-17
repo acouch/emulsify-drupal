@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+  cli:
+    environment:
+      DRUSH_ALLOW_XDEBUG: '0'
+      XDEBUG_ENABLED: '0'
+      PATH: /home/docker/.pyenv/shims:/home/docker/.pyenv/bin:/home/docker/.rvm/gems/ruby-2.6.5/bin:/home/docker/.rvm/gems/ruby-2.6.5@global/bin:/home/docker/.rvm/rubies/ruby-2.6.5/bin:/home/docker/.yarn/bin:/home/docker/.config/yarn/global/node_modules/.bin:/home/docker/.nvm/versions/node/v12.13.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/docker/.composer/vendor/bin:/home/docker/.rvm/bin 
+    hostname: cli
+    image: docksal/cli:2.10-php7.3
+    volumes:
+    - cli_home:/home/docker:rw
+    - project_root:/var/www:rw,nocopy,cached
+volumes:
+  cli_home: {}
+  project_root:
+    driver: local
+    driver_opts:
+      device: $PWD
+      o: bind
+      type: none
+
